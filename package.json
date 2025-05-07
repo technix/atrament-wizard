@@ -1,7 +1,7 @@
 {
   "name": "atrament-wizard",
   "description": "A command line utility for Atrament projects",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "license": "MIT",
   "type": "module",
   "bin": "./bin/atrament-wizard.mjs",

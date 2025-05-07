@@ -163,10 +163,10 @@ async function configure(projectFolder) {
       name: 'language',
       message: 'UI language:',
       choices: [
-        { name: 'English', value: 'en' },
-        { name: 'Ukrainian', value: 'ua' }
+        { message: 'English', name: 'en' },
+        { message: 'Ukrainian', name: 'ua' }
       ],
-      initial: 'English'
+      initial: 'en'
     },
   ]);
   return config;
