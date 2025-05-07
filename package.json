@@ -1,0 +1,21 @@
+{
+  "name": "atrament-wizard",
+  "description": "A command line utility for Atrament projects",
+  "version": "0.1.0",
+  "license": "MIT",
+  "type": "module",
+  "bin": "./bin/atrament-wizard.mjs",
+  "author": "Serhii Mozhaiskyi (sergei.mozhaisky@gmail.com)",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/technix/atrament-wizard.git"
+  },
+  "dependencies": {
+    "adm-zip": "0.5.16",
+    "axios": "1.9.0",
+    "commander": "13.1.0",
+    "enquirer": "2.4.1",
+    "ora": "8.2.0",
+    "yoctocolors": "2.1.1"
+  }
+}
