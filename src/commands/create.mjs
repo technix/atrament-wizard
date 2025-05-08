@@ -7,21 +7,16 @@ import axios from 'axios';
 import AdmZip from 'adm-zip';
 import enquirer from 'enquirer';
 import ora from 'ora';
+import { getLatestRelease } from '../util.mjs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const githubUser = 'technix';
-const githubRepo = 'atrament-web-ui';
 const tmpZip = '_atrament-web-ui-tmp.zip';
 
 async function getZipUrl() {
-  const response = await axios({
-    method: 'GET',
-    url: `https://api.github.com/repos/${githubUser}/${githubRepo}/releases/latest`,
-    responseType: 'json',
-  });
-  return response.data?.zipball_url;
+  const release = await getLatestRelease();
+  return release.zipball_url;
 }
 
 async function downloadZip(url, zipFile) {
