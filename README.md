@@ -4,7 +4,11 @@ This is a command-line utility for [Atrament](https://github.com/technix/atramen
 
 ## Usage
 
+### Create a new Atrament project
 ```npx atrament-wizard create your-project```
+
+### Publish Inky's story.js as Atrament HTML file
+```npx atrament-wizard publish```
 
 ## TODO
 
