@@ -132,12 +132,12 @@ async function configure(projectFolder) {
       name: 'projectDescription',
       message: 'Project description:',
       initial: 'My first Atrament game'
-    },
+    },    
     {
       type: 'input',
       name: 'projectInkFile',
       message: 'Main Ink file:',
-      initial: 'showcase.ink'
+      initial: 'story.ink'
     },
     {
       type: 'select',
