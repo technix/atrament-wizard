@@ -4,7 +4,7 @@ import colors from 'yoctocolors';
 import create from "./commands/create.mjs";
 import publish from "./commands/publish.mjs";
 
-const VERSION = "0.1.2";
+const VERSION = "0.1.4";
 
 program
   .name('atrament-wizard')
