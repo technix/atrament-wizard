@@ -7,16 +7,19 @@ import axios from 'axios';
 import AdmZip from 'adm-zip';
 import enquirer from 'enquirer';
 import ora from 'ora';
-import { getLatestRelease } from '../util.mjs';
+import { getLatestRelease, getDevelopmentZipUrl } from '../util.mjs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const tmpZip = '_atrament-web-ui-tmp.zip';
 
-async function getZipUrl() {
+async function getZipUrl(devel = false) {
+  if (devel) {
+    return [ getDevelopmentZipUrl(), '@atrament/web-ui DEVEL' ];
+  }
   const release = await getLatestRelease();
-  return release.zipball_url;
+  return [ release.zipball_url, release.name ];
 }
 
 async function downloadZip(url, zipFile) {
@@ -55,15 +58,7 @@ async function extractZip(projectPath, zipFile) {
   });
 }
 
-async function run(projectName, projectPath, zipFile, cfg) {
-  const spinnerGetZip = ora('Retrieving release information...').start();
-  const zipUrl = await getZipUrl();
-  if (!zipUrl) {
-    spinnerGetZip.fail("Failed to fetch release information from GitHub.");
-    return;
-  }
-  spinnerGetZip.succeed();
-
+async function run(zipUrl, projectName, projectPath, zipFile, cfg) {
   const spinnerDownloadZip = ora(`Downloading Atrament UI: ${zipUrl}`).start();
   await downloadZip(zipUrl, zipFile);
   spinnerDownloadZip.succeed();
@@ -167,7 +162,16 @@ async function configure(projectFolder) {
   return config;
 }
 
-export default async function actionCreate(projectFolder) {
+export default async function actionCreate(projectFolder, options) {
+  const spinnerGetZip = ora('Retrieving release information...').start();
+  const [ zipUrl, atramentVersion ] = await getZipUrl(options.devel);
+  if (!zipUrl) {
+    spinnerGetZip.fail("Failed to fetch release information from GitHub.");
+    return;
+  }
+  spinnerGetZip.succeed(`Release: ${atramentVersion}`);
+
+
   let config;
   let configIsOK = false;
   while (!configIsOK) {
@@ -184,5 +188,5 @@ export default async function actionCreate(projectFolder) {
   const projectPath = path.join(process.cwd(), config.projectFolder);
   const tmpZipFile = path.join(__dirname, tmpZip);
   
-  run(config.projectFolder, projectPath, tmpZipFile, config);
+  run(zipUrl, config.projectFolder, projectPath, tmpZipFile, config);
 }

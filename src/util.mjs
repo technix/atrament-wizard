@@ -2,6 +2,7 @@ import axios from 'axios';
 
 const githubUser = 'technix';
 const githubRepo = 'atrament-web-ui';
+const devBranch = 'master';
 
 export async function getLatestRelease() {
   let response;
@@ -15,4 +16,8 @@ export async function getLatestRelease() {
     return false;
   }
   return response.data;
+}
+
+export function getDevelopmentZipUrl() {
+  return `https://api.github.com/repos/${githubUser}/${githubRepo}/zipball/${devBranch}`;
 }

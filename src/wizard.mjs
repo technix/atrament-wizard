@@ -14,10 +14,11 @@ program
 program.command('create')
   .description('Create a new Atrament project')
   .argument('[project-name]', 'project folder name')
+  .option('-d, --devel', 'Use development version of Atrament (unstable)')
   .action(async (projectFolder, options) => {
     console.log(colors.inverse('  Atrament Wizard: create new project  '));
     try {
-      await create(projectFolder);
+      await create(projectFolder, options);
     } catch (e) {
       console.error(e);
     }
@@ -38,5 +39,5 @@ Run in the folder with ink story.js file. If file name is omitted, wizard search
   });
 
 export default function wizard() {
-  program.parse();
+  program.parse(process.argv);
 }
