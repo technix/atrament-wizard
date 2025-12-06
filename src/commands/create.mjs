@@ -90,6 +90,8 @@ async function run(zipUrl, projectName, projectPath, zipFile, cfg) {
   atramentConfigJSON.language = cfg.language;
   if (cfg.language === 'ua') {
     atramentConfigJSON.locale = 'uk_UA';
+  } else if (cfg.language === 'de') {
+    atramentConfigJSON.locale = 'de_DE';
   }
   atramentConfigJSON.game.source = cfg.projectInkFile;
 
@@ -154,6 +156,7 @@ async function configure(projectFolder) {
       message: 'UI language:',
       choices: [
         { message: 'English', name: 'en' },
+        { message: 'German', name: 'de' },
         { message: 'Ukrainian', name: 'ua' }
       ],
       initial: 'en'
