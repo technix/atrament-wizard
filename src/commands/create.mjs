@@ -68,11 +68,6 @@ async function run(zipUrl, projectName, projectPath, zipFile, cfg) {
   fs.rmSync(zipFile);
   spinnerCreateProject.succeed();
 
-  console.log("> Installing dependencies");
-  process.chdir(projectPath);
-  execSync('npm install --loglevel error', {stdio: 'inherit'});
-  execSync('npm run install-inklecate', {stdio: 'inherit'});
-
   console.log('> Updating atrament.config.js');
   const atramentConfig = path.join(projectPath, 'atrament.config.json');
   let atramentConfigJSON = {};
@@ -95,11 +90,21 @@ async function run(zipUrl, projectName, projectPath, zipFile, cfg) {
   }
   atramentConfigJSON.game.source = cfg.projectInkFile;
 
+  fs.renameSync(
+    path.join(projectPath, 'root', 'game', 'story.ink'),
+    path.join(projectPath, 'root', 'game', cfg.projectInkFile)
+  );
+
   try {
     fs.writeFileSync(atramentConfig, JSON.stringify(atramentConfigJSON, null, 2));
   } catch (err) {
     console.error('Error writing atrament.config.json:', err.message);
   }
+
+  console.log("> Installing dependencies");
+  process.chdir(projectPath);
+  execSync('npm install --loglevel error', {stdio: 'inherit'});
+  execSync('npm run install-inklecate', {stdio: 'inherit'});
 
   console.log('> Done.');
 }
