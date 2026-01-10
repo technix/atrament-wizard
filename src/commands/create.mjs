@@ -84,9 +84,9 @@ async function run(zipUrl, projectName, projectPath, zipFile, cfg) {
   atramentConfigJSON.font = cfg.defaultFont;
   atramentConfigJSON.language = cfg.language;
   if (cfg.language === 'ua') {
-    atramentConfigJSON.locale = 'uk_UA';
+    atramentConfigJSON.locale = 'uk-UA';
   } else if (cfg.language === 'de') {
-    atramentConfigJSON.locale = 'de_DE';
+    atramentConfigJSON.locale = 'de-DE';
   }
   atramentConfigJSON.game.source = cfg.projectInkFile;
 
