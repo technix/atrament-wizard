@@ -1,10 +1,12 @@
+import fs from 'node:fs';
 import { program } from "commander";
 import colors from 'yoctocolors';
 
 import create from "./commands/create.mjs";
 import publish from "./commands/publish.mjs";
 
-const VERSION = "0.1.4";
+const cfg = JSON.parse(fs.readFileSync('package.json', 'utf8'));
+const VERSION = cfg.version;
 
 program
   .name('atrament-wizard')
