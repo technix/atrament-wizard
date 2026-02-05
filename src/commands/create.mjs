@@ -59,7 +59,7 @@ async function extractZip(projectPath, zipFile) {
 }
 
 async function run(zipUrl, projectName, projectPath, zipFile, cfg) {
-  const spinnerDownloadZip = ora(`Downloading Atrament UI: ${zipUrl}`).start();
+  const spinnerDownloadZip = ora(`Downloading Atrament: ${zipUrl}`).start();
   await downloadZip(zipUrl, zipFile);
   spinnerDownloadZip.succeed();
 
@@ -68,7 +68,7 @@ async function run(zipUrl, projectName, projectPath, zipFile, cfg) {
   fs.rmSync(zipFile);
   spinnerCreateProject.succeed();
 
-  console.log('> Updating atrament.config.js');
+  console.log('> Updating atrament.config.json');
   const atramentConfig = path.join(projectPath, 'atrament.config.json');
   let atramentConfigJSON = {};
   try {
