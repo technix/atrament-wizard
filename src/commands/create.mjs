@@ -151,7 +151,7 @@ async function configure(projectFolder) {
     {
       type: 'select',
       name: 'defaultFont',
-      message: 'Default font:',
+      message: 'UI font:',
       choices: ['System', 'Sans Serif', 'Serif', 'Monospaced', 'Fira Sans', 'Lora', 'Merriweather', 'OpenDyslexic'],
       initial: 'System'
     },
